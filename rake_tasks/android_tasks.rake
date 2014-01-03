@@ -11,14 +11,12 @@ task :emulator_start do
 
 	#spawn emulator and save process id
 	command = "$ANDROID_HOME/tools/emulator -avd #{AVD_NAME}"
-	puts command
 	pid = spawn command
 	Process.detach(pid)
 
 	pidFile = File.open(".emulator.pid", "w")
 	pidFile.write(pid)
 	pidFile.close
-	puts RESTART_ADB
 
 	if RESTART_ADB 
 		`$ANDROID_HOME/platform-tools/adb kill-server`
